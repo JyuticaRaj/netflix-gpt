@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import Header from './Header'
+import React, { useState } from "react";
+import Header from "./Header";
 
 const Login = () => {
-    const[isSignInForm,setSignInForm ]=useState(true);
-    const toggleSignForm=()=>{
-           setSignInForm(!isSignInForm)
-    }
+  const [isSignInForm, setSignInForm] = useState(true);
+
+  const toggleSignForm = () => {
+    setSignInForm(!isSignInForm);
+  };
+
   return (
     <div className="relative w-screen h-screen">
       <Header />
@@ -17,38 +19,52 @@ const Login = () => {
         alt="background"
       />
 
-      {/* Login Form */}
-      <form className="w-3/12 absolute p-12 bg-black/60 mt-36 mx-auto right-0 left-0 text-white rounded-lg z-1">
-        <h1 className="font-bold text-3xl py-4">{isSignInForm ? "Sign In":"Sign Up"}</h1>
-  
-       {!isSignInForm && <input
-          type="text"
-          placeholder="Full Name"
-          className="p-4 my-4 w-full bg-gray-700"
-        />}
-       
-       
+      {/* Overlay to darken background */}
+      <div className="absolute w-full h-full bg-black/60"></div>
+
+      {/* Login / Sign Up Form */}
+      <form
+        className="w-96 absolute top-1/2 left-1/2 
+        -translate-x-1/2 -translate-y-1/2
+        p-12 bg-black/70 text-white rounded-lg shadow-xl"
+      >
+        <h1 className="font-bold text-3xl py-4">
+          {isSignInForm ? "Sign In" : "Sign Up"}
+        </h1>
+
+        {/* Full Name only for SignUp */}
+        {!isSignInForm && (
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="p-4 my-3 w-full bg-gray-700 rounded"
+          />
+        )}
+
         <input
           type="text"
-          placeholder="Email id"
-          className="p-4 my-4 w-full bg-gray-700"
+          placeholder="Email Address"
+          className="p-4 my-3 w-full bg-gray-700 rounded"
         />
-        
 
         <input
           type="password"
           placeholder="Password"
-          className="p-4 my-4 w-full bg-gray-700"
+          className="p-4 my-3 w-full bg-gray-700 rounded"
         />
 
-        <button className="p-4 my-4 bg-red-700 w-full rounded-lg">
-          {isSignInForm ? "Sign In":"Sign Up"}
+        <button className="p-4 my-4 bg-red-700 w-full rounded-lg hover:bg-red-800">
+          {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <p className='py-4 cursor-pointer'onClick={toggleSignForm}>
-         {isSignInForm ? "New to Netflix? signUp Now":"Already registered? sign In Now."}</p>
+
+        <p className="py-2 cursor-pointer text-gray-300" onClick={toggleSignForm}>
+          {isSignInForm
+            ? "New to Netflix? Sign Up Now"
+            : "Already registered? Sign In Now."}
+        </p>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
