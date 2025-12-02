@@ -1,8 +1,24 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { checkvalidData } from "../utils/validate";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
+  const [errorMessage,seterrorMessage]=useState(null)
+  const email =useRef(null)
+  const password =useRef(null)
+
+
+   //Validate the form data
+    const habdleButtonClick =()=>{
+       console.log(email.current.value)
+     console.log(password.current.value)
+
+    const message= checkvalidData(email.current.value,password.current.value)
+   seterrorMessage(message)
+
+    }
+    
 
   const toggleSignForm = () => {
     setSignInForm(!isSignInForm);
@@ -24,6 +40,7 @@ const Login = () => {
 
       {/* Login / Sign Up Form */}
       <form
+       onSubmit={(e)=>e.preventDefault()}
         className="w-96 absolute top-1/2 left-1/2 
         -translate-x-1/2 -translate-y-1/2
         p-12 bg-black/70 text-white rounded-lg shadow-xl"
@@ -42,18 +59,20 @@ const Login = () => {
         )}
 
         <input
+        ref={email}
           type="text"
           placeholder="Email Address"
           className="p-4 my-3 w-full bg-gray-700 rounded"
         />
 
         <input
+        ref={password}
           type="password"
           placeholder="Password"
           className="p-4 my-3 w-full bg-gray-700 rounded"
         />
-
-        <button className="p-4 my-4 bg-red-700 w-full rounded-lg hover:bg-red-800">
+         <p className="text-red-500">{errorMessage}</p>
+        <button onClick={habdleButtonClick} className="p-4 my-4 bg-red-700 w-full rounded-lg hover:bg-red-800">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
 
