@@ -11,8 +11,6 @@ const Login = () => {
 
    //Validate the form data
     const habdleButtonClick =()=>{
-       console.log(email.current.value)
-     console.log(password.current.value)
 
     const message= checkvalidData(email.current.value,password.current.value)
    seterrorMessage(message)
